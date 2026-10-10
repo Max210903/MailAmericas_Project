@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: modelo_ejemplo
+    description: Modelo de ejemplo para comprobar que dbt funciona.
+    columns:
+      - name: id
+        data_tests:
+          - unique
+          - not_null

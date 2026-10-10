@@ -1,0 +1,14 @@
+# Las credenciales se leen de variables de entorno. Los valores por defecto sirven para
+# ejecutar dbt desde tu máquina; dentro de Airflow las define el docker-compose.
+mailamericas:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DBT_HOST', 'localhost') }}"
+      port: "{{ env_var('DBT_PORT', '5432') | as_number }}"
+      user: "{{ env_var('DBT_USER', 'mailamericas') }}"
+      password: "{{ env_var('DBT_PASSWORD', 'mailamericas') }}"
+      dbname: "{{ env_var('DBT_DBNAME', 'mailamericas') }}"
+      schema: "{{ env_var('DBT_SCHEMA', 'analytics') }}"
+      threads: 4

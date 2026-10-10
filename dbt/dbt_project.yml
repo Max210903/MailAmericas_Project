@@ -1,0 +1,16 @@
+name: mailamericas
+version: "1.0.0"
+profile: mailamericas
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - target
+  - dbt_packages
+
+models:
+  mailamericas:
+    +materialized: view
