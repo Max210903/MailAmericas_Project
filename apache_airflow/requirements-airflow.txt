@@ -1,0 +1,5 @@
+pandas
+pymssql
+boto3
+requests
+openpyxl
