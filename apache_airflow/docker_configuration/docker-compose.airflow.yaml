@@ -68,6 +68,13 @@ x-airflow-common:
     # See https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/check-health.html#scheduler-health-check-server
     # yamllint enable rule:line-length
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
+    # Conexión de dbt (ver dbt/profiles.yml) a la base de datos del proyecto, que corre aparte
+    # (ver postgres/) y se alcanza a través del puerto que publica en el host
+    DBT_HOST: host.docker.internal
+    DBT_PORT: '5432'
+    DBT_USER: mailamericas
+    DBT_PASSWORD: mailamericas
+    DBT_DBNAME: mailamericas
     # WARNING: Use _PIP_ADDITIONAL_REQUIREMENTS option ONLY for a quick checks
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
@@ -79,6 +86,7 @@ x-airflow-common:
     - ../logs:/opt/airflow/logs
     - ../config:/opt/airflow/config
     - ../plugins:/opt/airflow/plugins
+    - ../../dbt:/opt/airflow/dbt
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on

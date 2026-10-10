@@ -5,3 +5,9 @@ COPY requirements-airflow.txt /requirements-airflow.txt
 RUN pip install --no-cache-dir \
     "apache-airflow==2.10.5" \
     -r /requirements-airflow.txt
+
+# dbt va en su propio entorno virtual para que sus dependencias no choquen con las de Airflow
+COPY requirements-dbt.txt /requirements-dbt.txt
+
+RUN python -m venv /opt/airflow/dbt_venv \
+    && PIP_USER=false /opt/airflow/dbt_venv/bin/pip install --no-cache-dir -r /requirements-dbt.txt
